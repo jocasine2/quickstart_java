@@ -1,6 +1,10 @@
 version: "3"
 
 services:
-  myapp:
-    container_name: myapp
+  app:
+    container_name: ${APP_NAME}_app
     build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"

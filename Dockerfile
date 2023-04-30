@@ -1,8 +1,7 @@
-FROM openjdk:11-jdk
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-RUN javac HelloWorld.java
+FROM alpine:3.17
 
-CMD ["sh", "-c", "java -cp /usr/src/myapp HelloWorld && tail -f /dev/null"]
+# Instale o Bash, o OpenJDK 11 e o Maven
+RUN apk add --no-cache bash openjdk11 maven
 
-
+# Mantenha o contêiner em execução
+CMD tail -f /dev/null
