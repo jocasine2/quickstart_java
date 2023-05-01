@@ -28,11 +28,7 @@ function enter(){
 
 function app(){
     if [ $1 == "new" ]; then
-        echo criando $2
-        new_app
-        app_turbolink_remove
-        atualiza_nome_app $2
-        docker-compose up -d
+        app mvn archetype:generate
     elif [ $1 == "enter" ]; then
         enter $APP_NAME'_app'
     elif [ $1 == "scaffold" ]; then
