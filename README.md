@@ -15,4 +15,5 @@ app mvn -f projeto-teste/ clean package
 app java -jar projeto-teste/target/projeto-teste-0.0.1-SNAPSHOT.jar
 
 # rodando teste
-mvn test -Dtest=AppTest#shouldAnswerWithTrue
+app mvn test -f projeto-teste/pom.xml
+app mvn -f /path/to/pom.xml -Dtest=NomeDaClasseDeTeste test
