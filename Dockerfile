@@ -7,4 +7,4 @@ RUN apk add --no-cache bash maven
 EXPOSE 8080
 
 # define o comando a ser executado quando o contêiner for iniciado
-CMD ["java", "-jar", "projeto-teste/target/projeto-teste-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/projeto-teste-0.0.1-SNAPSHOT.jar"]

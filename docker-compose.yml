@@ -5,7 +5,7 @@ services:
     container_name: ${APP_NAME}_app
     build: .
     volumes:
-      - .:/app
+      - ./${APP_NAME}:/app
     ports:
       - "8080:8080"
 

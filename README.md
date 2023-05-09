@@ -9,11 +9,11 @@ Repositório de estudos para um novo desafio em java
 source start.sh
 
 # empacotando o projeto
-app mvn -f projeto-teste/ clean package
+app mvn clean package
 
 # executando jar
-app java -jar projeto-teste/target/projeto-teste-0.0.1-SNAPSHOT.jar
+app java -jar target/projeto-teste-0.0.1-SNAPSHOT.jar
 
 # rodando teste
-app mvn test -f projeto-teste/pom.xml
+app mvn test pom.xml
 app mvn -f /path/to/pom.xml -Dtest=NomeDaClasseDeTeste test
