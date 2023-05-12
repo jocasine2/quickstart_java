@@ -5,6 +5,6 @@ source docker-compose/funcoes.sh
 app mvn clean package
 
 # executando jar
-app java -jar target/projeto-teste-0.0.1-SNAPSHOT.jar
+app java -jar target/demo-0.0.1-SNAPSHOT.jar
 
 docker-compose up -d --build
