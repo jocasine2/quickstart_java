@@ -9,6 +9,6 @@ public class TestController{
 
     @RequestMapping("/primeiro-projeto")
     public String Test(){
-        return "teste com sucesso!";
+        return "teste com sucesso 2!";
     }
 }

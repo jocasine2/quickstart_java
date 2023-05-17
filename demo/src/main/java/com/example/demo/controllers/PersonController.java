@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.controllers.Person;
 
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api2")
 public class PersonController {
 
     private final JdbcTemplate jdbcTemplate;
@@ -21,9 +20,13 @@ public class PersonController {
 
     @GetMapping("/people")
     public List<Person> getPeople() {
-        String sql = "SELECT name, age FROM people";
+        String sql = "SELECT name, age FROM persons";
         return jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Person(rs.getString("name"), rs.getInt("age")));
     }
 
+    @GetMapping("/teste-people")
+    public String testePeople() {
+        return "teste PEOPLE com sucesso!";
+    }
 }

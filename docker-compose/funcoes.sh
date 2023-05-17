@@ -1,6 +1,13 @@
 #!/bin/bash
 
 #funções uteis
+
+#reinicia a aplicação e mostra os logs do app
+function dua(){
+    docker-compose down && docker-compose up -d
+    #docker attach $APP_NAME'_app'
+}
+
 function getEnv(){
     eval "$(
     cat .env | awk '!/^\s*#/' | awk '!/^\s*$/' | while IFS='' read -r line; do
