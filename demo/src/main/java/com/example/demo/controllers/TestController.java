@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class TestController{
+public class TestController {
 
     @RequestMapping("/primeiro-projeto")
-    public String Test(){
-        return "teste com sucesso 2!";
+    public String primeiroProjeto() {
+        return "Teste com sucesso!";
     }
 }
