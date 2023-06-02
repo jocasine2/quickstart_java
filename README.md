@@ -8,6 +8,9 @@ Repositório de estudos para um novo desafio em java
 # iniciando o ambiente de desenvolvimento
 source start.sh
 
+# criando app
+spring init --name=app --groupId=com.exemplo --artifactId=app --dependencies=web app
+
 # empacotando o projeto
 app mvn clean package
 
