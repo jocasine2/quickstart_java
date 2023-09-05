@@ -1,10 +1,18 @@
 FROM openjdk:17-jdk-alpine
-COPY ./demo/ .
 
+# Instala o Maven
 RUN apk add --no-cache bash maven
 
-# expõe a porta 8080 para acesso externo
+# Define um diretório de trabalho no contêiner
+WORKDIR /app
+
+COPY ./demo .
+
+# Executa o Maven no diretório de trabalho para construir o projeto
+# RUN mvn clean package
+
+# Expõe a porta 8080 para acesso externo
 EXPOSE 8080
 
-# define o comando a ser executado quando o contêiner for iniciado
+# # Define o comando a ser executado quando o contêiner for iniciado
 CMD ["java", "-jar", "target/demo-0.0.1-SNAPSHOT.jar"]

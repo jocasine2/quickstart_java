@@ -146,6 +146,8 @@ function destroy_project(){
 }
 
 function restart(){
+    sudo rm -rf /home/postgres/${APP_NAME}
+    sudo rm -rf ${APP_NAME}/target
     docker-compose down
     prune
     source start.sh

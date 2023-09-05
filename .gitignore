@@ -1,3 +1,4 @@
 .env
 projeto-teste/target
 docker-compose/postgres
+demo/target
