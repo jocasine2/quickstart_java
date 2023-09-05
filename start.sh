@@ -5,8 +5,8 @@ clear
 # carregando funções
 source docker-compose/funcoes.sh
 
-# iniciando banco de dados
-docker-compose up -d postgres
+# iniciando containers de desenvolvimento
+docker-compose up -d --build
 
 app mvn clean install
 
