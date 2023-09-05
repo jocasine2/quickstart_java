@@ -1,5 +1,5 @@
 FROM openjdk:17-jdk-alpine
-WORKDIR /app
+COPY ./demo/ .
 
 RUN apk add --no-cache bash maven
 
