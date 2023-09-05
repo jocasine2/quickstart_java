@@ -4,8 +4,10 @@ services:
   app:
     container_name: ${APP_NAME}_app
     build: .
+    environment:
+      - APP_NAME=${APP_NAME}
     volumes:
-      - ./${APP_NAME}:/app
+      - ./app:/app
     ports:
       - "8080:8080"
 

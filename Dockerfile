@@ -6,7 +6,7 @@ RUN apk add --no-cache bash maven
 # Define um diretório de trabalho no contêiner
 WORKDIR /app
 
-COPY ./demo .
+COPY ./app .
 
 # Executa o Maven no diretório de trabalho para construir o projeto
 # RUN mvn clean package
@@ -15,4 +15,4 @@ COPY ./demo .
 EXPOSE 8080
 
 # # Define o comando a ser executado quando o contêiner for iniciado
-CMD ["java", "-jar", "target/demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/app.jar"]

@@ -1,4 +1,4 @@
-CREATE DATABASE demo_development;
+CREATE DATABASE mercalista_api_development;
 
 CREATE TABLE Persons (
     id int,
