@@ -1,3 +1,4 @@
+# Use a imagem base desejada
 FROM openjdk:17-jdk-alpine
 
 # Instala o Maven
@@ -6,13 +7,11 @@ RUN apk add --no-cache bash maven
 # Define um diretório de trabalho no contêiner
 WORKDIR /app
 
+# Copie os arquivos do aplicativo e o arquivo .env para o diretório de trabalho
 COPY ./app .
 
-# Executa o Maven no diretório de trabalho para construir o projeto
-# RUN mvn clean package
-
-# Expõe a porta 8080 para acesso externo
+# Expõe a porta 8080 para acesso externo (se necessário)
 EXPOSE 8080
 
-# # Define o comando a ser executado quando o contêiner for iniciado
-CMD ["java", "-jar", "target/app.jar"]
+# Usa o nome e a versão do definida no .env para rodar o jar correspondente ao app
+CMD ["sh", "-c", "java -jar target/$APP_NAME-$APP_VERSION.jar"]
