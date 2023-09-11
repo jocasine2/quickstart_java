@@ -7,7 +7,7 @@ source docker-compose/funcoes.sh
 
 # criando e atualizando banco de dados
 docker-compose up -d --build postgres
-db restore demo.sql
+db restore app.sql
 
 #criando e atualizando app
 app mvn clean install

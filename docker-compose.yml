@@ -1,11 +1,14 @@
-version: "3"
-
 services:
   app:
     container_name: ${APP_NAME}_app
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - APP_NAME=${APP_NAME}
+      - APP_VERSION=${APP_VERSION}
     volumes:
-      - ./${APP_NAME}:/app
+      - ./app:/app
     ports:
       - "8080:8080"
 
