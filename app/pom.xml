@@ -66,6 +66,20 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.6.1.Final</version> <!-- Use the desired version -->
 		</dependency>
+
+		 <!-- Selenium WebDriver -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version> <!-- Certifique-se de usar a versão mais recente disponível -->
+		</dependency>
+
+		<!-- WebDriver para o Chrome -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>5.0.3</version> <!-- Certifique-se de usar a versão mais recente disponível -->
+		</dependency>
 	</dependencies>
 
 	<build>
