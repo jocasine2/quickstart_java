@@ -51,8 +51,10 @@ public class TestController {
 
         // Preenche o form e vai para a lista
         driver.findElement(By.id("consultarProgramaAtende")).click();
-        driver.findElement(By.xpath("(//input[@id='consultarProgramaAtende'])[2]")).click();
+        driver.findElement(By.xpath("(//input[@id=\'consultarProgramaAtende\'])[2]")).click();
+        driver.findElement(By.cssSelector("tr:nth-child(3) > .estados:nth-child(9) > #consultarEstadosHabilitado")).click();
         driver.findElement(By.xpath("(//input[@id='form_submit'])[3]")).click();
+        
         driver.findElement(By.id("ConteudoDiv")).click();
     }
 
@@ -129,12 +131,12 @@ public class TestController {
             int totalPaginas = pageInfo[1];
 
             // Itera sobre as páginas restantes e coleta os códigos
-            for (int i = 2; i <= 3; i++) {
-                navigateToPage(driver, i);
-                // Coleta os códigos da página atual
-                List<String> novosCodigos = getPageCodes(driver);
-                codigos.addAll(novosCodigos);
-            }
+            // for (int i = 2; i <= 3; i++) {
+            //     navigateToPage(driver, i);
+            //     // Coleta os códigos da página atual
+            //     List<String> novosCodigos = getPageCodes(driver);
+            //     codigos.addAll(novosCodigos);
+            // }
         
             // Retorna o HTML da página, informações da página e códigos coletados
             return driver.getPageSource() + "Página Atual: " + pageInfo[0] + " Total de Páginas: " + pageInfo[1] + "<br>" + String.join("<br>", codigos);
