@@ -1,4 +1,3 @@
-version: '3'
 services:
   app:
     container_name: ${APP_NAME}_app
@@ -10,6 +9,7 @@ services:
       - APP_VERSION=${APP_VERSION}
     volumes:
       - ./app:/app
+      - ./docker-compose/m2-repo:/root/.m2/repository  # Volume para persistir o repositório Maven
     ports:
       - "8080:8080"
       - "9222:9222"

@@ -156,26 +156,6 @@ function prune(){
     docker system prune -a -f
 }
 
-function build_project(){
-    app_reset
-
-    app_scaffold_api unit name:string
-    app_scaffold_api localization longitude:string latitude:string
-    app_scaffold_api store name:string localization:references
-    app_scaffold_api list name:string date_time:date store:references
-    app_scaffold_api item name:string list:references
-    app_scaffold_api itemlist item:references list:references default:boolean unit:references
-    app_scaffold_api priceperunitofmeasure quantity:float unit:references
-    app_scaffold_api product description:string unit:references packagingquantity:float price:float
-    app_scaffold_api productitem item:references product:references
-    app_scaffold_api storeproduct store:references product:references
-
-    docker-compose up -d
-
-    app rails db:create
-    app rails db:migrate
-}
-
 function destroy_project(){
     remove_app
     docker-compose down
@@ -198,6 +178,11 @@ function se_existe(){
 
 function Welcome(){
     echo funções carregadas!
+}
+
+#java
+function rebuild(){
+    sudo rm -rf app/target/$APP_NAME-$APP_VERSION.jar && docker-compose down && docker-compose up --build -d && app mvn clean install && docker-compose up -d
 }
 
 Welcome

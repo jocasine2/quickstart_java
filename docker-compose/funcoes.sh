@@ -169,4 +169,9 @@ function start(){
     source start.sh
 }
 
+#java
+function rebuild(){
+    sudo rm -rf app/target/$APP_NAME-$APP_VERSION.jar && docker-compose down && docker-compose up --build -d && app mvn clean install && docker-compose up -d
+}
+
 Welcome

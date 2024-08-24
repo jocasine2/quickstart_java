@@ -1,0 +1,175 @@
+{
+  "id": "ecbb4913-344b-49ad-a6e2-a436b850e906",
+  "version": "2.0",
+  "name": "https://idp.transferegov.sistema.gov.br/idp/",
+  "url": "https://idp.transferegov.sistema.gov.br",
+  "tests": [{
+    "id": "456eb5e2-e943-4d18-95ed-a4de22478332",
+    "name": "[SIASTEC] Consultar lista de programas",
+    "commands": [{
+      "id": "2b5a169a-a5f3-495e-9421-4f8f31e2437e",
+      "comment": "",
+      "command": "open",
+      "target": "/idp/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f4757448-ccda-46f4-ad59-9de8a97d131d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Acesso livre",
+      "targets": [
+        ["linkText=Acesso livre", "linkText"],
+        ["css=.tg_btn_a", "css:finder"],
+        ["xpath=//a[contains(text(),'Acesso livre')]", "xpath:link"],
+        ["xpath=//form[@id='login_form']/div[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://www.gov.br/transferegov/pt-br/sistemas/acesso-livre')]", "xpath:href"],
+        ["xpath=//div[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Acesso livre')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "079c8cbb-cef6-4019-9d66-4527f21f5d95",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Consultar Programas",
+      "targets": [
+        ["linkText=Consultar Programas", "linkText"],
+        ["css=.callout:nth-child(2) .external-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Consultar Programas')]", "xpath:link"],
+        ["xpath=//div[@id='parent-fieldname-text']/p[2]/span/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://discricionarias.transferegov.sistema.gov.br/voluntarias/ForwardAction.do?modulo=programa&path=/ConsultarPrograma/ConsultarPrograma.do&Usr=guest&Pwd=guest')]", "xpath:href"],
+        ["xpath=//p[2]/span/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Consultar Programas')]", "xpath:innerText"]
+      ],
+      "value": "",
+      "opensWindow": true,
+      "windowHandleName": "win8957",
+      "windowTimeout": 2000
+    }, {
+      "id": "dba3624e-5981-4c4f-b6d1-2742a6081d48",
+      "comment": "",
+      "command": "selectWindow",
+      "target": "handle=${win8957}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "72155595-29f4-4b78-b281-055b102aa8a4",
+      "comment": "",
+      "command": "click",
+      "target": "id=consultarProgramaAtende",
+      "targets": [
+        ["id=consultarProgramaAtende", "id"],
+        ["name=programaAtendeAsArray", "name"],
+        ["xpath=//input[@id='consultarProgramaAtende']", "xpath:attributes"],
+        ["xpath=//tr[@id='tr-consultarProgramaAtende']/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[22]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "43faf302-d31e-40c6-bc81-5deee1150c94",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=(//input[@id='consultarProgramaAtende'])[2]",
+      "targets": [
+        ["xpath=(//input[@id='consultarProgramaAtende'])[2]", "xpath:attributes"],
+        ["xpath=//tr[@id='tr-consultarProgramaAtende']/td[2]/input[2]", "xpath:idRelative"],
+        ["xpath=//tr[22]/td[2]/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dd5d0f2d-053e-4b6a-a263-88b778a0c4bb",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(3) > .estados:nth-child(9) > #consultarEstadosHabilitado",
+      "targets": [
+        ["css=tr:nth-child(3) > .estados:nth-child(9) > #consultarEstadosHabilitado", "css:finder"],
+        ["xpath=(//input[@id='consultarEstadosHabilitado'])[27]", "xpath:attributes"],
+        ["xpath=//div[@id='tr-incluirProgramaEstados']/table/tbody/tr[3]/td[9]/input", "xpath:idRelative"],
+        ["xpath=//tr[3]/td[9]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e0670dcb-2d2f-4c9c-851c-4edd0aa8538a",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=(//input[@id='form_submit'])[3]",
+      "targets": [
+        ["xpath=(//input[@id='form_submit'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='consultar']/div/form/table/tbody/tr[25]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//tr[25]/td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ddb6bf5e-f80b-47aa-9da7-47c671b9882e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=2",
+      "targets": [
+        ["linkText=2", "linkText"],
+        ["css=.pagelinks > a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'2')]", "xpath:link"],
+        ["xpath=//div[@id='listaProgramas']/span[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=2&d-16544-g=2')]", "xpath:href"],
+        ["xpath=//span[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "960c92bc-e621-4419-91c5-12accc0e2f64",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=3",
+      "targets": [
+        ["linkText=3", "linkText"],
+        ["css=a:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'3')]", "xpath:link"],
+        ["xpath=//div[@id='listaProgramas']/span[2]/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=3&d-16544-g=3')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'3')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "83fb7bf0-b669-48bd-8fe9-584e3aecf1de",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=4",
+      "targets": [
+        ["linkText=4", "linkText"],
+        ["css=.pagelinks > a:nth-child(4)", "css:finder"],
+        ["xpath=//a[contains(text(),'4')]", "xpath:link"],
+        ["xpath=//div[@id='listaProgramas']/span[2]/a[3]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=4&d-16544-g=4')]", "xpath:href"],
+        ["xpath=//a[3]", "xpath:position"],
+        ["xpath=//a[contains(.,'4')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "44c7b6ba-fd2e-4899-bc01-bb1adf0a2677",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=5600020095503",
+      "targets": [
+        ["linkText=5600020095503", "linkText"],
+        ["css=.odd:nth-child(1) a", "css:finder"],
+        ["xpath=//a[contains(text(),'5600020095503')]", "xpath:link"],
+        ["xpath=//tbody[@id='tbodyrow']/tr/td/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/voluntarias/ConsultarPrograma/ResultadoDaConsultaDeProgramaDeConvenioDetalhar.do?id=50439')]", "xpath:href"],
+        ["xpath=//td/a", "xpath:position"],
+        ["xpath=//a[contains(.,'5600020095503')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "37088243-2421-4540-b975-53e0ebaa3568",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["https://idp.transferegov.sistema.gov.br/"],
+  "plugins": []
+}
