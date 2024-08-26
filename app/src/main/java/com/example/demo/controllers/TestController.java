@@ -131,12 +131,12 @@ public class TestController {
             int totalPaginas = pageInfo[1];
 
             // Itera sobre as páginas restantes e coleta os códigos
-            // for (int i = 2; i <= 3; i++) {
-            //     navigateToPage(driver, i);
-            //     // Coleta os códigos da página atual
-            //     List<String> novosCodigos = getPageCodes(driver);
-            //     codigos.addAll(novosCodigos);
-            // }
+            for (int i = 2; i < 4; i++) {
+                navigateToPage(driver, i);
+                // Coleta os códigos da página atual
+                List<String> novosCodigos = getPageCodes(driver);
+                codigos.addAll(novosCodigos);
+            }
         
             // Retorna o HTML da página, informações da página e códigos coletados
             return driver.getPageSource() + "Página Atual: " + pageInfo[0] + " Total de Páginas: " + pageInfo[1] + "<br>" + String.join("<br>", codigos);
