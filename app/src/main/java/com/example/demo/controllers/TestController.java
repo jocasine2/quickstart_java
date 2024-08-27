@@ -127,11 +127,14 @@ public class TestController {
             int[] pageInfo = extractPageInfoFromText(driver.getPageSource(), "Página (\\d+) de (\\d+)");
             
             // Coleta os códigos da tabela da primeira página
-            List<String> codigos = getPageCodes(driver);
+            List<String> codigos = new ArrayList<>();
             int totalPaginas = pageInfo[1];
 
-            // Itera sobre as páginas restantes e coleta os códigos
-            for (int i = 2; i < 4; i++) {
+            // Itera sobre as páginas e coleta os códigos
+            for (int i = 1; i <= totalPaginas; i++) {
+                // Adiciona um marcador para o início da nova página
+                codigos.add("========== pagina " + i + " ==========");
+
                 navigateToPage(driver, i);
                 // Coleta os códigos da página atual
                 List<String> novosCodigos = getPageCodes(driver);
