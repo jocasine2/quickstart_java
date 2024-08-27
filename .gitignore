@@ -2,3 +2,4 @@
 projeto-teste/target
 docker-compose/postgres
 demo/target
+app/target/mercalistaapi-0.1.0.jar
