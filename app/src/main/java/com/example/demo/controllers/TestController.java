@@ -103,7 +103,25 @@ public class TestController {
         return codigos;
     }
 
+    private List<String[]> getPageCodesAndLinks(WebDriver driver) {
+        List<String[]> codigosELinks = new ArrayList<>();
+        List<WebElement> codigoElements = driver.findElements(By.cssSelector("#tbodyrow a[href*='Detalhar']"));
+        
+        for (WebElement codigoElement : codigoElements) {
+            String codigo = codigoElement.getText();
+            String link = codigoElement.getAttribute("href");
+            codigosELinks.add(new String[]{codigo, link});
+        }
+        return codigosELinks;
+    }
+
     private void navigateToPage(WebDriver driver, int pageNumber) {
+        // Navega para o URL da página especificada
+         driver.get("https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=" + pageNumber + "&d-16544-g=" + pageNumber);
+    }
+
+
+    private void getProgramData(WebDriver driver, int pageNumber) {
         // Navega para o URL da página especificada
          driver.get("https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=" + pageNumber + "&d-16544-g=" + pageNumber);
     }
@@ -130,17 +148,23 @@ public class TestController {
             List<String> codigos = new ArrayList<>();
             int totalPaginas = pageInfo[1];
 
-            // Itera sobre as páginas e coleta os códigos
+            // Itera sobre as páginas e coleta os códigos e links
             for (int i = 1; i <= totalPaginas; i++) {
                 // Adiciona um marcador para o início da nova página
                 codigos.add("========== pagina " + i + " ==========");
-
+                
+                // Navega para a página correspondente
                 navigateToPage(driver, i);
-                // Coleta os códigos da página atual
-                List<String> novosCodigos = getPageCodes(driver);
-                codigos.addAll(novosCodigos);
+                
+                // Coleta os códigos e links da página atual
+                List<String[]> novosCodigosELinks = getPageCodesAndLinks(driver);
+                
+                // Adiciona os códigos e links à lista
+                for (String[] codigoELink : novosCodigosELinks) {
+                    codigos.add("Código: " + codigoELink[0] + " - Link: " + codigoELink[1]);
+                }
             }
-        
+
             // Retorna o HTML da página, informações da página e códigos coletados
             return driver.getPageSource() + "Página Atual: " + pageInfo[0] + " Total de Páginas: " + pageInfo[1] + "<br>" + String.join("<br>", codigos);
         } catch (Exception e) {
