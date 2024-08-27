@@ -105,7 +105,7 @@ public class TestController {
 
     private void navigateToPage(WebDriver driver, int pageNumber) {
         // Navega para o URL da página especificada
-        driver.get("https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=" + pageNumber + "&d-16544-g=33");
+         driver.get("https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=" + pageNumber + "&d-16544-g=" + pageNumber);
     }
 
     @RequestMapping("/primeiro-projeto")
