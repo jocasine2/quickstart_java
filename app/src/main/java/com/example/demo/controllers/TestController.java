@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.example.demo.models.Programa;
 
 @RestController
 @RequestMapping("/api")
@@ -62,14 +63,6 @@ public class TestController {
         // Adicione a lógica para realizar ações na página do programa, se necessário
     }
 
-    /**
-     * Encontra e extrai o número da página atual e o número total de páginas
-     * a partir do texto fornecido usando uma expressão regular.
-     *
-     * @param text O texto que contém o formato "Página :pagina_atual de :total_paginas".
-     * @param regex A expressão regular para encontrar o formato da página.
-     * @return Um array de inteiros onde o primeiro elemento é a página atual e o segundo é o total de páginas.
-     */
     private int[] extractPageInfoFromText(String text, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(text);
@@ -80,7 +73,6 @@ public class TestController {
             pageInfo[0] = Integer.parseInt(matcher.group(1)); // página_atual
             pageInfo[1] = Integer.parseInt(matcher.group(2)); // total_paginas
         } else {
-            // Se não encontrar correspondência, defina os valores como -1 ou qualquer valor padrão
             pageInfo[0] = -1;
             pageInfo[1] = -1;
         }
@@ -88,31 +80,16 @@ public class TestController {
         return pageInfo;
     }
 
-    /**
-     * Coleta códigos da tabela na página atual.
-     *
-     * @param driver O WebDriver usado para interagir com a página.
-     * @return Uma lista de códigos encontrados na tabela.
-     */
-    private List<String> getPageCodes(WebDriver driver) {
-        List<String> codigos = new ArrayList<>();
-        List<WebElement> codigoElements = driver.findElements(By.cssSelector("#tbodyrow a[href*='Detalhar']"));
-        for (WebElement codigoElement : codigoElements) {
-            codigos.add(codigoElement.getText());
-        }
-        return codigos;
-    }
-
-    private List<String[]> getPageCodesAndLinks(WebDriver driver) {
-        List<String[]> codigosELinks = new ArrayList<>();
+    private List<Programa> getPageProgramas(WebDriver driver) {
+        List<Programa> programas = new ArrayList<>();
         List<WebElement> codigoElements = driver.findElements(By.cssSelector("#tbodyrow a[href*='Detalhar']"));
         
         for (WebElement codigoElement : codigoElements) {
             String codigo = codigoElement.getText();
-            String link = codigoElement.getAttribute("href");
-            codigosELinks.add(new String[]{codigo, link});
+            String linkDetalhe = codigoElement.getAttribute("href");
+            programas.add(new Programa(codigo, linkDetalhe));
         }
-        return codigosELinks;
+        return programas;
     }
 
     private void navigateToPage(WebDriver driver, int pageNumber) {
@@ -120,10 +97,28 @@ public class TestController {
          driver.get("https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=" + pageNumber + "&d-16544-g=" + pageNumber);
     }
 
+    private String getProgramDetail(WebDriver driver, Programa programa) {
+        // Navega para o URL do programa
+        driver.get(programa.getLinkDetalhe());
+       
+        programa.setOrgaoVinculado(driver.findElement(By.id("tr-alterarProgramaOrgaoSubordinado")).findElement(By.cssSelector("td.field")).getText());
+        programa.setCodigo(driver.findElement(By.id("tr-alterarProgramaCodigo")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setOrgao(driver.findElement(By.id("tr-alterarProgramaOrgao")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setOrgaoVinculado(driver.findElement(By.id("tr-alterarProgramaOrgaoSubordinado")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setOrgaoExecutor(driver.findElement(By.id("tr-alterarProgramaOrgaoExecutor")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setTipoInstrumento(driver.findElement(By.id("tr-alterarProgramaModalidade")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setSubtipoInstrumento(driver.findElement(By.id("tr-alterarProgramaSubtipoInstrumento")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setQualificacaoProposta(driver.findElement(By.id("tr-alterarProgramaQualificacaoProponente")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setAtende(driver.findElement(By.id("tr-alterarProgramaProgramaAtendea")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setCategorias(driver.findElement(By.id("tr-alterarProgramaCategoriasPrograma")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setNome(driver.findElement(By.id("tr-alterarProgramaNomeDoPrograma")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setDataInicioEmenda(driver.findElement(By.id("alterarProgramaDataInicioEmendaParlamentar")).getAttribute("value").trim());
+        programa.setDataFimEmenda(driver.findElement(By.id("alterarProgramaDataFimEmendaParlamentar")).getAttribute("value").trim());
+        programa.setAcaoOrcamentaria(driver.findElement(By.id("tr-alterarProgramaAcaoPpaPac")).findElement(By.cssSelector("td.field")).getText().trim());
+        programa.setEstadosHabilitados(driver.findElement(By.id("tr-alterarProgramaEstadosHabilitados")).findElement(By.cssSelector("td.field")).getText().trim());
+        // Retorna o conteúdo da página de detalhes do programa
+        return driver.getPageSource()+"<pre style=\"text-align: left;\">"+programa.toString()+"<pre>";
 
-    private void getProgramData(WebDriver driver, int pageNumber) {
-        // Navega para o URL da página especificada
-         driver.get("https://discricionarias.transferegov.sistema.gov.br/voluntarias/ConsultarPrograma/PreenchaOsDadosDaConsultaDeProgramaDeConvenioConsultar.do?d-16544-t=listaProgramas&d-16544-p=" + pageNumber + "&d-16544-g=" + pageNumber);
     }
 
     @RequestMapping("/primeiro-projeto")
@@ -144,29 +139,24 @@ public class TestController {
             // Encontre a informação da página no HTML da página
             int[] pageInfo = extractPageInfoFromText(driver.getPageSource(), "Página (\\d+) de (\\d+)");
             
-            // Coleta os códigos da tabela da primeira página
-            List<String> codigos = new ArrayList<>();
+            // Coleta os códigos e links da tabela das páginas
+            List<Programa> programas = new ArrayList<>();
             int totalPaginas = pageInfo[1];
 
-            // Itera sobre as páginas e coleta os códigos e links
             for (int i = 1; i <= totalPaginas; i++) {
-                // Adiciona um marcador para o início da nova página
-                codigos.add("========== pagina " + i + " ==========");
+                // Adiciona um marcador para o início da nova página (opcional)
+                programas.add(new Programa("========== pagina " + i + " ==========", null));
                 
                 // Navega para a página correspondente
                 navigateToPage(driver, i);
                 
-                // Coleta os códigos e links da página atual
-                List<String[]> novosCodigosELinks = getPageCodesAndLinks(driver);
-                
-                // Adiciona os códigos e links à lista
-                for (String[] codigoELink : novosCodigosELinks) {
-                    codigos.add("Código: " + codigoELink[0] + " - Link: " + codigoELink[1]);
-                }
+                // Coleta os programas da página atual
+                List<Programa> novosProgramas = getPageProgramas(driver);
+                programas.addAll(novosProgramas);
             }
 
-            // Retorna o HTML da página, informações da página e códigos coletados
-            return driver.getPageSource() + "Página Atual: " + pageInfo[0] + " Total de Páginas: " + pageInfo[1] + "<br>" + String.join("<br>", codigos);
+            // Exibe a página de detalhes do primeiro programa coletado
+            return getProgramDetail(driver, programas.get(1));
         } catch (Exception e) {
             e.printStackTrace();
             return "Erro ao executar o teste: " + e.getMessage();
